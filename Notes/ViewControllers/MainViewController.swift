@@ -7,84 +7,99 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UITableViewController {
     
-    var collectionView: UICollectionView!
+    var objects = [
+        Notes(nameLabel: "Тут будет заголовок", description: "Тут будет описание", isFavorite: false)
+    ]
     
-
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSearch()
-       setupCollectionView()
+        self.view.backgroundColor = UIColor.white
+        self.navigationItem.title = "Заметки"
+        self.navigationItem.leftBarButtonItem = self.editButtonItem
+        
+        let customButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonItem))
+        
+        self.navigationItem.rightBarButtonItem = customButton
+    
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
     }
+    
+    
 
-    func setupCollectionView() {
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = .gray
-        view.addSubview(collectionView)
+   
+    
+    @objc
+    func addButtonItem() {
+        let editVC = EditTableViewController()
+        let navigationVC = UINavigationController(rootViewController: editVC)
+        present(navigationVC, animated: true)
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return objects.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = "\(indexPath)"
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellid")
+        var content = cell.defaultContentConfiguration()
+        let object = objects[indexPath.row]
+        content.text = object.nameLabel
+        content.secondaryText = object.description
+        cell.contentConfiguration = content
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-    }
-    
-    
-    
-    func setupSearch() {
-        navigationController?.navigationBar.barTintColor = .green
-        navigationController?.navigationBar.shadowImage = UIImage()
-        let searchController = UISearchController(searchResultsController: nil)
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.delegate = self
-    }
-
-}
-
-// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
-extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellid", for: indexPath)
-        cell.backgroundColor = .red
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            objects.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let movedNotes = objects.remove(at: sourceIndexPath.row)
+        objects.insert(movedNotes, at: destinationIndexPath.row)
+        tableView.reloadData()
+    }
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let done = doneAction(at: indexPath)
+        return UISwipeActionsConfiguration(actions: [done])
+    }
+    
+    func doneAction(at indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .destructive, title: "Done") { (action, view, completion) in
+            self.objects.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            completion(true)
+        }
+        action.backgroundColor = .systemGreen
+        action.image = UIImage(systemName: "checkmark.circle")
+        return action
+    }
+    
     
 }
 
-extension MainViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
-    }
-}
 
-import SwiftUI
-
-struct ListVCProvider: PreviewProvider {
-    static var previews: some View {
-        ContainerView().edgesIgnoringSafeArea(.all)
-    }
-    
-    struct ContainerView: UIViewControllerRepresentable {
-        
-        let tabBarVC = MainViewController()
-        
-        func makeUIViewController(context: UIViewControllerRepresentableContext<ListVCProvider.ContainerView>) -> MainViewController {
-            return tabBarVC
-        }
-        
-        func updateUIViewController(_ uiViewController: ListVCProvider.ContainerView.UIViewControllerType, context: UIViewControllerRepresentableContext<ListVCProvider.ContainerView>) {
-            
-        }
-    }
-}
 

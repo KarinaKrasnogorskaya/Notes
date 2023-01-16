@@ -16,7 +16,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let pageVC = PageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
-        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.rootViewController = pageVC
         window?.makeKeyAndVisible()
     }

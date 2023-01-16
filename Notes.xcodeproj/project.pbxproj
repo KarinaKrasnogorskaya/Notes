@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A10B44A29759D870043685C /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A10B44929759D870043685C /* CustomTableViewCell.swift */; };
+		9A10B44C2975A01D0043685C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A10B44B2975A01D0043685C /* Model.swift */; };
+		9A10B44E2975BA010043685C /* EditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A10B44D2975BA010043685C /* EditTableViewController.swift */; };
+		9A10B4502975E58F0043685C /* CustomTf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A10B44F2975E58F0043685C /* CustomTf.swift */; };
 		9A4E09D3296DA89B00A98048 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4E09D2296DA89B00A98048 /* AppDelegate.swift */; };
 		9A4E09D5296DA89B00A98048 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4E09D4296DA89B00A98048 /* SceneDelegate.swift */; };
 		9A4E09D7296DA89B00A98048 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4E09D6296DA89B00A98048 /* MainViewController.swift */; };
@@ -18,6 +22,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A10B44929759D870043685C /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		9A10B44B2975A01D0043685C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		9A10B44D2975BA010043685C /* EditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableViewController.swift; sourceTree = "<group>"; };
+		9A10B44F2975E58F0043685C /* CustomTf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTf.swift; sourceTree = "<group>"; };
 		9A4E09CF296DA89B00A98048 /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A4E09D2296DA89B00A98048 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A4E09D4296DA89B00A98048 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +71,7 @@
 				9A4E09D2296DA89B00A98048 /* AppDelegate.swift */,
 				9A4E09D4296DA89B00A98048 /* SceneDelegate.swift */,
 				9A615BCD296EF301005C03BB /* ViewControllers */,
+				9A10B44B2975A01D0043685C /* Model.swift */,
 				9A4E09DE296DA89C00A98048 /* Assets.xcassets */,
 				9A4E09E0296DA89C00A98048 /* LaunchScreen.storyboard */,
 				9A4E09E3296DA89C00A98048 /* Info.plist */,
@@ -76,6 +85,9 @@
 			children = (
 				9A4E09E9296DAA6F00A98048 /* PageController.swift */,
 				9A615BCB296EF2E2005C03BB /* OnboardingViewController.swift */,
+				9A10B44929759D870043685C /* CustomTableViewCell.swift */,
+				9A10B44D2975BA010043685C /* EditTableViewController.swift */,
+				9A10B44F2975E58F0043685C /* CustomTf.swift */,
 				9A4E09D6296DA89B00A98048 /* MainViewController.swift */,
 			);
 			path = ViewControllers;
@@ -152,11 +164,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A4E09D7296DA89B00A98048 /* MainViewController.swift in Sources */,
+				9A10B44E2975BA010043685C /* EditTableViewController.swift in Sources */,
 				9A615BCC296EF2E2005C03BB /* OnboardingViewController.swift in Sources */,
 				9A4E09D3296DA89B00A98048 /* AppDelegate.swift in Sources */,
+				9A10B44A29759D870043685C /* CustomTableViewCell.swift in Sources */,
 				9A4E09D5296DA89B00A98048 /* SceneDelegate.swift in Sources */,
 				9A4E09DD296DA89B00A98048 /* Notes.xcdatamodeld in Sources */,
 				9A4E09EA296DAA6F00A98048 /* PageController.swift in Sources */,
+				9A10B4502975E58F0043685C /* CustomTf.swift in Sources */,
+				9A10B44C2975A01D0043685C /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

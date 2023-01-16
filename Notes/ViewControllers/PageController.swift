@@ -97,7 +97,8 @@ private extension PageViewController {
         let pageThree = OnboardingViewController(imageName: "three",
                                                titleText: "Для ценителей простоты",
                                                subtitleText: "Храните все в одном месте")
-        let pageMain = MainViewController()
+        
+        let pageMain = UINavigationController(rootViewController: MainViewController())
 
         
         pages.append(pageOne)
