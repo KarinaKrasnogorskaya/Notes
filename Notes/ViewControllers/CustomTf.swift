@@ -46,7 +46,7 @@ final class RegisterTextField: UITextField {
         
         layer.cornerRadius = 10
         layer.borderColor = UIColor.black.cgColor
-        layer.borderWidth = 1.5
+        layer.borderWidth = 1
         layer.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])

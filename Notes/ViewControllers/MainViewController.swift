@@ -7,12 +7,17 @@
 
 import UIKit
 
+protocol EditTableViewControllerDelegate {
+    func sendText(name: String, descriptio: String, isFavorite: Bool) 
+}
+
 class MainViewController: UITableViewController {
     
     var objects = [
         Notes(nameLabel: "Тут будет заголовок", description: "Тут будет описание", isFavorite: false)
     ]
     
+  
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +52,8 @@ class MainViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return objects.count
     }
+    
+
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
@@ -98,8 +105,28 @@ class MainViewController: UITableViewController {
         return action
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      let destination = EditTableViewController()
+        destination.nameTF.text = objects[indexPath.row].nameLabel
+        destination.descriptionTF.text = objects[indexPath.row].description
+        destination.title = "Edit"
+        destination.delegate = self
+      navigationController?.pushViewController(destination, animated: true)
+    }
+    
     
 }
 
+
+extension MainViewController: EditTableViewControllerDelegate {
+
+    func sendText(name: String, descriptio: String, isFavorite: Bool) {
+        let newElement = Notes(nameLabel: name, description: descriptio, isFavorite: false)
+        
+        let newIndexPath = IndexPath(row: objects.count, section: 0)
+        objects.append(newElement)
+        tableView.insertRows(at: [newIndexPath], with: .fade)
+    }
+}
 
 

@@ -9,16 +9,16 @@ import UIKit
 
 class EditTableViewController: UIViewController {
     
-    let nameTF = RegisterTextField(placeholder: "Name")
+    var nameTF = RegisterTextField(placeholder: "Name")
     
-    let descriptionTF = RegisterTextField(placeholder: "Dec")
+    var descriptionTF = RegisterTextField(placeholder: "Dec")
     
-   
+   var notes = Notes(nameLabel: "", description: "", isFavorite: false)
     
     let nameLabel = UILabel()
     let descriptionLabel = UILabel()
     
-  
+    var delegate: EditTableViewControllerDelegate! 
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +26,7 @@ class EditTableViewController: UIViewController {
         let button = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(actionCancel))
         self.navigationItem.leftBarButtonItem = button
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveAction))
+        self.navigationItem.rightBarButtonItem = saveButton
       
         
     }
@@ -36,6 +37,10 @@ class EditTableViewController: UIViewController {
     
     @objc
     func saveAction() {
+        let mainVC = MainViewController()
+        mainVC.sendText(name: nameTF.text ?? "", descriptio: descriptionTF.text ?? "", isFavorite: false)
+        
+        self.navigationController?.pushViewController(mainVC, animated: true)
         
     }
     
@@ -81,7 +86,7 @@ private extension EditTableViewController {
                 $0.translatesAutoresizingMaskIntoConstraints = false
             }
             NSLayoutConstraint.activate([
-                nameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+                nameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
                 nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 nameLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
                 
